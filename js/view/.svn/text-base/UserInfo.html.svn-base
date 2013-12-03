@@ -1,0 +1,35 @@
+
+<!--个人信息 -->
+<li class="list-group-item">
+	<span class="label">乐跑ID</span>
+	<span>LEPAO{{user.id}}</span>
+</li>
+<li class="list-group-item">
+  <a class="pull-right set-email" href="change-email.html" target="_blank">修改邮箱</a>
+	<span class="label">邮箱</span>
+	<span>{{user.email}}</span>
+</li>
+<li class="list-group-item">
+	<a class="pull-right set-psw" href="change-password.html" target="_blank">修改密码</a>
+	<span class="label">密码</span>
+	<span>******</span>
+</li>
+<li class="list-group-item">
+	<span class="label">送货地址</span>
+	{{#if address}}
+		<div>
+		{{address.realName}}<br>
+		{{address.province}} {{address.city}} {{address.country}}<br>
+		{{address.street}}<br>
+		邮编：{{postalCode}}<br>
+		{{address.mobile}}<br>
+		{{address.telephone}}
+		</div>
+		{{else}}
+		<div>
+			暂无
+		</div>
+	{{/if}}
+	
+</li>
+
