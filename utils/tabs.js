@@ -21,7 +21,9 @@ jQuery.fn.tabs = function  (control) {
 		element.trigger("change.tabs", tabName);
 	});
 
-	//bind the custom event
+	//bind the custom events 
+	//.bind( eventType [, eventData ], handler(eventObject));
+	/*element.bind("eventType",function(eventObject,eventData));*/
 	element.bind("change.tabs", function(e,tabName){
 		element.find(">[data-tab]").removeClass("active");
 		element.find(">[data-tab='"+tabName+"']").addClass("active");
