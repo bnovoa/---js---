@@ -1,0 +1,20 @@
+
+<!-- 订单列表 -->
+{{#each data}}
+<tr>
+	<td>{{orderNum}}</td>
+	<td class="text-left">
+	  <img class="goods-img" src="{{imageUrl}}" width="70" height="70">
+	  <span class="goods-text">{{productName}}<em>等</em></span>
+	</td>
+	<td>{{statusName}}</td>
+	<td>￥<span>{{price}}</span></td>
+	<td>{{createTimeStr}}</td>
+	<td>
+		<a href="{{statusActionUrl}}">{{statusAction}}</a>
+	</td>
+</tr>
+{{/each}}
+
+
+<!-- {"status":1,"productIds":[1,2,6],"orderNum":"HL1311181224068","price":700 -->
