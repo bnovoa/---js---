@@ -1,12 +1,13 @@
 define(function(require, exports, module) {
-	var User = new (require("../model/user.js"))();
+	var User = new (require("../model/user"))(),
+	UserView = require("../view/user-view");
+
 	module.exports = UserController;
-	var UserController = function() {
-		this.init = function() {
-			this.showUser();
-		}
-	};
-	UserController.prototype.showUser = function() {
-		
+	
+	var UserController = function() {};
+	
+	UserController.prototype.initUser = function(nodeId) {
+		var userView = new UserView(nodeId);
+		User.fetch().then(userView.render);
 	};
 });

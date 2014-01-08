@@ -13,7 +13,10 @@ define(function(require,exports,module){
 	}
 
 	User.prototype.fetchRemote = function(){
-		$.get("user",success);
+	//利用 promise模式简化回调
+		return $.get("user").then(function(data){
+			return data;
+		});
 	};
 
 	User.prototype.destroy = function(){
