@@ -1,4 +1,3 @@
-
 seajs.config({
 	// Enable plugins
 	plugins: ['shim', 'text'],
@@ -6,7 +5,7 @@ seajs.config({
 	// Configure alias
 	alias: {
 		'jquery': {
-			src: '../lib/jquery-1.10.2.min.js',
+			src: './lib/jquery-1.10.2.min.js',
 			exports: 'jQuery'
 		}
 		,
@@ -15,7 +14,7 @@ seajs.config({
 			exports: 'AppConfig'
 		},
 		'handlebars':{
-			src: '../lib/handlebars/handlebars.js',
+			src: './lib/handlebars/handlebars.js',
 			exports: 'Handlebars'
 		},
 		'domain':{
@@ -34,4 +33,3 @@ seajs.config({
 //  [ /^(.*\/js\/view\/.*\.(?:css|js))(?:.*)$/i,     '$1?'+new Date().getTime() ],
 //  [ /^(.*\/js\/page\/.*\.(?:css|js))(?:.*)$/i,     '$1?'+new Date().getTime() ]
 });
-

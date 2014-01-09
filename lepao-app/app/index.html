@@ -6,15 +6,13 @@
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
-<script type="text/x-handlebars" data-template-name="info">
-  <b>Posts:</b> {{view.posts}}
-  <br>
-  <b>Hobbies:</b> {{view.hobbies}}
-</script>
+  <div id="user-center">
+    <script type="text/x-handlebars-template" data-tpl-name="user-info">
+      <b>demo:</b>
+      <br>
+      <b>user-account:</b> <a href="#" class="btn info" title="个人中心">{{address.realName}}</a>
+    </script>
+  </div>
 
   <script src="js/seajs/sea.js" data-config="config" data-main="apps/index.js"></script>
 </body>

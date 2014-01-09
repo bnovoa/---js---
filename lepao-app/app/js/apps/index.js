@@ -3,6 +3,7 @@ define(function(require, exports, module) {
 	var $ = require("jquery"),
 		UserController = new (require("../controllers/user-controller.js"))();
 	$(function(){
-		console.log();
+		console.log("frame-start...");
+		UserController.initUser("#user-center");
 	});
 });
