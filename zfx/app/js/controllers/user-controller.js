@@ -12,7 +12,8 @@ define(function(require, exports, module) {
 		Events.bind("info",function(event,data){
 			alert(data);
 		});
-
 	};
+
+	
 	module.exports = UserController;
 });
