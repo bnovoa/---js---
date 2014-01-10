@@ -2,6 +2,7 @@ define(function(require, exports, module) {
 	/*app 用户信息展示*/
 	var Handlebars = require("handlebars"),
 		$ = require("jquery"),
+		Events = require("../../utils/events");
 		me = null;
 	var UserView = function(el) {
 		console.log("view start...");
@@ -22,6 +23,8 @@ define(function(require, exports, module) {
 	UserView.prototype._handleClick = function(event) {
 		event.preventDefault()
 		alert("这是点击事件----前往个人主页！");
+		//把自定义事件通知到外面
+		Events.trigger("info","通知事件的消息！");
 	};
 
 	// 对模板渲染数据的封装
