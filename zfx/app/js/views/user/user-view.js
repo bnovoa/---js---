@@ -4,9 +4,9 @@ define(function(require, exports, module) {
 		$ = require("jquery"),
 		Events = require("../../utils/events");
 		me = null;
-	var UserView = function(el) {
+	var UserView = function(nodeId) {
 		console.log("view start...");
-		this.el = $(el);
+		this.el = $(nodeId);
 		//处理 点击事件
 		this.el.on("click","a.btn",this._handleClick);
 		me = this;

@@ -1,27 +1,38 @@
 define(function(require, module, exports) {
 	var dateParser = new(require("../utils/DateParser"))();
 	var Sport = {
-		ret: 0,
-		msg: null,
-		erroCode:null,
-		time: 0,
-		sleepHours: 0,
-		steps: 0,
-		distance: 0,
-		calorie: 0,
-		init: function(data) {
+		sleepData:{
+			time: 0,
+			sleepHours: 0,
+			steps: 0,
+			distance: 0,
+			calorie: 0
+		},
+		sportData:{
+			time: 0,
+			sleepHours: 0,
+			steps: 0,
+			distance: 0,
+			calorie: 0
+		},
+		setSleepData: function(data) {
 			if (!data) throw new Error("data为空！");
-			if (data.ret < 0) {
-				this.ret = data.ret;
-				this.msg = data.msg;
-			}else{
-				this.time = this._dataHelper.time(data);
-				this.sleepHours = data.sleepHours;
-				this.steps = data.steps;
-				this.distance = data.distance;
-				this.calorie = data.calorie;
-			}
-			return this;
+			this.sleepData.time = data.time;
+			this.sleepData.sleepHours=data.sleepHours;
+			this.sleepData.steps=data.steps;
+			this.sleepData.distance=data.distance;
+			this.sleepData.calorie= data.calorie;
+		},
+		setSportData: function(data) {
+			if (!data) throw new Error("data为空！");
+			this.sportData.time = data.time;
+			this.sportData.sleepHours=data.sleepHours;
+			this.sportData.steps=data.steps;
+			this.sportData.distance=data.distance;
+			this.sportData.calorie= data.calorie;
+		},
+		getSportdata:function(){
+			return this.sportData;
 		},
 		_dataHelper: {
 			time: function(data) {
