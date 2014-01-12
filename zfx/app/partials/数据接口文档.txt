@@ -1,0 +1,32 @@
+数据接口文档：
+  1、按日、周、天获得用户的运动数据
+  		${path}/order/h/v2/user/getSportDataByIndex?index=1？beginTime=
+	  	说明：
+			index = 1 按天,  index = 2, 按周 index = 3 按月 , index 为其他值时按index = 1 处理
+		  	成功返回：
+				{
+				  "ret": 1,
+				  "msg": "success",
+				  "sleepDatas":[],
+				  "sportDatas": [
+				      {"time":1389085200000,"sleepHours":5,"steps":1500,"distance":2000,"calorie":2000},
+				      {"time":1389085200000,"sleepHours":5,"steps":1500,"distance":2000,"calorie":2000},
+				      {"time":1389085200000,"sleepHours":5,"steps":1500,"distance":2000,"calorie":2000},
+				      {"time":1389085200000,"sleepHours":5,"steps":1500,"distance":2000,"calorie":2000},
+				      {"time":1389085200000,"sleepHours":5,"steps":1500,"distance":2000,"calorie":2000}
+				      ]
+				}
+			其中，calorie--总的卡路里，sleepHours--总睡觉时长，单位为 s, steps--总步数, distance--总距离，time --时间
+
+	2、获得用户总的运动数据
+		${path}/order/h/v2/user/getSportData
+		  成功返回：
+			{ret: 1,todayCalorie: 0,sumCalorie: 676,sumSteps: 9692,msg: "success",sumDays: 1,todaySteps:0, sumDistance:0}
+			其中，sumCalorie--总的卡路里，todayCalorie--今天的卡路里，sumDays--总天数, sumSteps--总步数, todaySteps--今天的距离，m
+
+	3、用户是否有手环
+		${path}/order/h/v2/user/haveBracelet
+
+	 	 返回：
+			{ret: 1,code: 1,msg: "success"}
+			说明，code=1--有手环，code=0--无手环		

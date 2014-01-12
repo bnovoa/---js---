@@ -10,15 +10,8 @@
     <script type="text/x-handlebars-template" data-tpl-name="user-info">
       <b>demo:</b>
       <br>
-      <b>user-account:</b> <a href="#" class="btn info" title="个人中心">{{address.realName}}</a>
-    </script>
-    <script type="text/x-handlebars-template" data-tpl-name="cart-list">
-      <b>cart:</b>
-      <br>
-      {{#each data}}
-       <span class="cart">orderNum:{{orderNum}}</span>
-       <a href="#" class="btn info" title="个人中心">{{address.realName}}</a>br
-      {{/each}}
+      <b>user-account:</b>
+      {{#if errorTag}}{{msg}}{{else}} <a href="#" class="btn info" title="个人中心">{{userName}}</a> {{/if}}
     </script>
   </div>
 
