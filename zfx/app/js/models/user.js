@@ -11,21 +11,29 @@ define(function(require, exports, module) {
 
 	var User = {
 		ret: 0,
-		errorTag:null,
+		errorTag: null,
 		msg: null,
 		userName: "",
 		avatar: "",
 		init: function(data) {
+			// console.log(data);
 			if (!data) {
 				throw new Error("data为空！")
 			};
-			if (data.ret < 0){
+			if (data.ret < 0) {
 				this.ret = data.ret;
 				this.msg = data.msg;
 				this.errorTag = 1;
-			}else{
-				this.userName = data.address.realName;
-				this.avatar = data.imgUrl;
+			} else {
+				if(!data.user){
+					throw new Error("data为空！")
+				}
+				if(data.user.nickname != ""){
+					this.userName = data.user.nickname;
+				}else{
+					this.userName = data.user.email;
+				}
+				this.avatar = data.user.portrait;
 			}
 			return this;
 		}

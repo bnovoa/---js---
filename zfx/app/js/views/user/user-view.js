@@ -2,11 +2,10 @@ define(function(require, exports, module) {
 	/*app 用户信息展示*/
 	var Handlebars = require("handlebars"),
 		$ = require("jquery"),
-		Events = require("../../utils/events");
+		Events = require("../../utils/EventBus"),
 		me = null;
-	var UserView = function(nodeId) {
-		console.log("view start...");
-		this.el = $(nodeId);
+	var UserView = function(el) {
+		this.el = $(el);
 		//处理 点击事件
 		this.el.on("click","a.btn",this._handleClick);
 		me = this;
@@ -14,14 +13,14 @@ define(function(require, exports, module) {
 
 	//渲染
 	UserView.prototype.render = function(data) {
-		console.log("render...",data);
-		var tpl = me.el.find("[data-tpl-name]").html();
-		me._populate(data, tpl);
+		var tpl = me.el.find("[data-tpl-name='user-info']").html();
+		// me._populate(data, tpl);
+		me._populate.apply(me,[data, tpl]);
 	};
 
 	//处理点击事件
 	UserView.prototype._handleClick = function(event) {
-		event.preventDefault()
+		event.preventDefault();
 		alert("这是点击事件----前往个人主页！");
 		//把自定义事件通知到外面
 		Events.trigger("info","通知事件的消息！");

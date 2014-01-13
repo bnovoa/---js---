@@ -4,71 +4,88 @@
 <meta charset="utf-8">
 <title></title>
 <link rel="stylesheet" href="css/app.css">
-<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="lib/excanvas.min.js"></script><![endif]-->
+<!--[if lte IE 8]><script src="lib/excanvas.min.js"></script><![endif]-->
 <script src="lib/jquery-1.10.2.min.js"></script>
 <script src="lib/jquery.flot.min.js"></script>
-<script src="lib/jquery.flot.time.min.js"></script>
 <script src="lib/jquery.flot.pie.min.js"></script>
 <script>
-  $(function() {
-    var data = [],
-			series = 2;
+$(function() {
+  
+  $('#navbar .has-sub').hover(function() {
+    $(this).find('.sub-list').toggle();
+  });
+  
+  var todayCaloryPercent = 85;
+  var data = [ {
+      label: '今日完成目标',
+      data: [todayCaloryPercent],
+      color: '#99c83d'
+    },{
+      data: [100-todayCaloryPercent],
+      color: '#ddd'
+    }
+  ];
 
-		for (var i = 0; i < series; i++) {
-			data[i] = {
-				label: "Series" + (i + 1),
-				data: Math.floor(Math.random() * 100) + 1
-			}
-		}
-		console.log(data)
-  
-  
-    $.plot('#today-calories', data, {
-      series: {
-        pie: {
-          innerRadius: 0.8,
-          show: true
-        }
+  $.plot('#today-calories', data, {
+    series: {
+      pie: {
+        innerRadius: 0.8,
+        show: true
       }
-    });
-  })
+    },
+    legend: {
+      show: true,
+      position: "nw",
+      labelFormatter: function(label, series) {
+        return "<div style='font-size:8pt; text-align:center; padding:2px;'>" + label + "<br/>" + "<strong>" + Math.round(series.percent) + "%" + "</strong></div>";
+      },
+      backgroundOpacity: 0
+    }
+  });
+  
+})
 </script>
 </head>
-<body>
+<body id="home">
   <div id="navbar">
     <div class="inner">
       <a class="logo" href="#">
-        <img src="img/lepao_logo.png" width="104" height="45" title="到乐跑首页" alt="乐跑首页">
+        <img src="img/lepao_logo.png" width="92" height="40" title="到乐跑首页" alt="乐跑首页">
       </a>
       
       <ul class="nav">
-        <li id="profile">
-          
-          <a class="has-sub" href="#">
-            <img class="avatar" src="img/avatar.jpg" width="" height="">
+        <li id="t-profile" class="has-sub">
+          <a href="#">
+            <span class="avatar-wrapper">
+              <img class="avatar" src="img/avatar.jpg" width="32" height="32">
+            </span>
             <span class="username">horahora</span>
           </a>
           <ul class="sub-list">
-            <li><a href="#">个人中心</a></li>
             <li><a href="#">退出</a></li>
           </ul>
         </li>
-        <li class="current"><a href="home.html">首页</a></li>
-        <li><a href="sports.html">运动</a></li>
-        <li><a href="data.html">数据中心</a></li>
+        <li id="t-home">
+          <a href="home.html">首页</a>
+        </li>
+        <li id="t-sports">
+          <a href="sports.html">运动</a>
+        </li>
+        <li id="t-data">
+          <a href="data.html">数据中心</a>
+        </li>
       </ul>
     </div>  
   </div>
   
   
-  
   <div class="page-container">
     
     <div>
-      <div id="today-calories" style="width:400px;height:400px;margin:auto"></div>
+      <div id="today-calories" style="width:400px;height:400px;"></div>
     </div>
     
-    <h2>累积使用乐跑手环</h2>
+    <h2>累积使用乐跑运动</h2>
     <ul class="accumulation unstyled clearfix">
       <li>
         <div class="label">卡路里</div>
@@ -78,13 +95,23 @@
         <div class="label">步数</div>
         <div class="row-num"><strong>44889</strong>步</div>
       </li>
-      <li>
+      <li class="last">
         <div class="label">运动时间</div>
         <div class="row-num"><strong>88</strong>天</div>
       </li>
     </ul>
     
-    
+  </div>
+  
+  <div id="global-footer">
+    <p>Copyright © 2014 Hoolai Games. 互爱公司版权所有。</p>
+  </div>
+  
+  
+  <div id="sign-in-container">
+    <div id="sign-in-panel">
+      
+    </div>
   </div>
   
 </body>

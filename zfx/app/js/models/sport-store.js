@@ -1,11 +1,11 @@
 define(function(require, exports, module) {
     var $ = require("jquery");
-    var SportStore = function() {
-      me = this;
-    };
+    var domain = require("domain");
 
-    SportStore.prototype.fechByIndex = function(index){
-      return $.getJson("/getSportDataByIndex").then(function(data){
+    var SportStore = function() { me = this;};
+
+    SportStore.prototype.fetchByIndex = function(index,startTime,endTime,num){
+      return $.ajax(domain+"getSportDataByIndex",{data:{"index":index,"startTime":startTime,"endTime":endTime,"num":num},dataType:"json"}).then(function(data){
         if(data.ret == 1){
           /*var sport = require("models/Sport");
           if(data.sportDatas.length>0){
@@ -21,14 +21,27 @@ define(function(require, exports, module) {
             };
           }*/
           //FIXME ?sleepDatas
-          return this.getTransData(data.sportDatas);
+          return me.getTransData(data.sportDatas);
         }else{
             return data.msg;
         }
       });
-    }
-    SportStore.prototype._getjsonData = function() {
-      return jsonData['sportDatas'];
+    };
+    //summary data 
+    SportStore.prototype.fetchAllData = function() {
+      return $.getJSON(domain+"getSportData").then(function(data){
+        if(data.ret == 1){
+          return data;
+        }else{
+            return data.msg;
+        }
+      });
+    };
+    // check bracelet
+    SportStore.prototype.checkBracelet = function() {
+      return $.getJSON(domain+"haveBracelet").then(function(data){
+          return data;
+      });
     };
 
     SportStore.prototype._getData = function(baseData,dataId) {
@@ -45,10 +58,10 @@ define(function(require, exports, module) {
     SportStore.prototype.getTransData = function(data) {
       var allData = {};
       var sleepData = new Array(), stepsData = new Array(), distanceData = new Array(), calorieData = new Array();
-      sleepData = this._getData('sleepHours');
-      stepsData = this._getData('steps');
-      distanceData = this._getData('distance');
-      calorieData = this._getData('calorie');
+      sleepData = this._getData(data,'sleepHours');
+      stepsData = this._getData(data,'steps');
+      distanceData = this._getData(data,'distance');
+      calorieData = this._getData(data,'calorie');
       allData["sleepData"] = sleepData;
       allData['stepsData'] = stepsData;
       allData['distanceData'] = distanceData;

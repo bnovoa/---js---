@@ -1,0 +1,30 @@
+<div class="inner">
+  <a class="logo" href="index.html">
+    <img src="img/lepao_logo.png" width="92" height="40" title="到乐跑首页" alt="乐跑首页">
+  </a>
+  
+  <ul class="nav">
+    <li id="t-profile" class="has-sub">
+      <script type="text/x-handlebars-template" data-tpl-name="user-info">
+        <a href="#">
+          <img class="avatar" src="{{#if avatar}}{{avatar}}{{else}}img/avatar.jpg{{/if}}" width="32" height="32">
+          <span class="username">{{userName}}</span>
+        </a>
+         {{#if userName}}
+          <ul class="sub-list">
+            <li><a href="#">退出</a></li>
+          </ul>
+        {{/if}}
+      </script>
+    </li>
+    <li id="t-home">
+      <a href="index.html">首页</a>
+    </li>
+    <li id="t-sports">
+      <a href="sports.html">运动</a>
+    </li>
+    <li id="t-data">
+      <a href="data.html">数据中心</a>
+    </li>
+  </ul>
+</div>  

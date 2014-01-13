@@ -1,4 +1,4 @@
-define(function(require, module, exports) {
+define(function(require,exports,module) {
 	var dateParser = new(require("../utils/DateParser"))();
 	var Sport = {
 		sleepData:{

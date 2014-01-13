@@ -1,0 +1,19 @@
+define(function(require,exports,module){
+	var Plotchart = function(){		
+	}
+	module.exports = Plotchart;
+});
+
+function DatePicker(timeNode) {
+		this.timeNode = timeNode;
+		seajs.use("lib/bootstrap-datetimepicker.min", function() {
+			seajs.use("lib/bootstrap-datetimepicker.zh-CN", function() {
+				timeNode.datetimepicker({
+					format: 'yyyy-mm-dd',
+					language: 'zh-CN',
+					autoclose: true,
+					minView: 2
+				});
+			});
+		});
+	}

@@ -6,7 +6,6 @@ define(function(require, exports, module) {
 	$(function(){
 		// console.log("frame-start...");
 		userController.initUser("#t-profile");
-		sportController.initSportChart("#sports-trends");
-		sportController.initSportSummary("#today-calories","#sport-summary");
+		sportController.initSportChart("#sports-trends",{"moth":"#nodeid"});
 	});
 });
