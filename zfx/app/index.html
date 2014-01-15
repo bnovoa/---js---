@@ -1,21 +1,24 @@
-<!doctype html>
-<html lang="en" ng-app="myApp">
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
 <head>
   <meta charset="utf-8">
-  <title>lepao web App</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>乐跑 web-app</title>
   <link rel="stylesheet" href="css/app.css"/>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="lib/excanvas.min.js"></script><![endif]-->
+  
 </head>
 <body id="home">
   <div id="navbar">
       <div class="inner">
-        <a class="logo" href="index.html">
+        <a class="logo" href="http://www.lepao.com">
           <img src="img/lepao_logo.png" width="92" height="40" title="到乐跑首页" alt="乐跑首页">
         </a>
         
         <ul class="nav">
           <li id="t-profile" class="has-sub">
             <script type="text/x-handlebars-template" data-tpl-name="user-info">
-              <a href="#">
+              <a href="#" >
                 <span class="avatar-wrapper">
                   {{#if avatar}}
                     <img class="avatar" src="{{avatar}}" width="32" height="32">
@@ -23,9 +26,9 @@
                 </span>
                 <span class="username">{{#if userName}}{{userName}}{{else}}未登录{{/if}}</span>
               </a>
-               {{#if ds}}
+               {{#if userName}}
                 <ul class="sub-list">
-                  <li><a href="#">退出</a></li>
+                  <li><a id="sign-out" href="#">退出</a></li>
                 </ul>
               {{/if}}
             </script>
@@ -33,9 +36,9 @@
           <li id="t-home">
             <a href="index.html">首页</a>
           </li>
-          <!-- <li id="t-sports">
+          <li id="t-sports">
             <a href="sports.html">运动</a>
-          </li> -->
+          </li>
           <li id="t-data">
             <a href="data.html">数据中心</a>
           </li>
@@ -49,7 +52,7 @@
         <!-- 数据加载中... -->
       </div>
     </div>
-    <h2>累积使用乐跑手环</h2>
+    <h2>累积使用乐跑运动</h2>
     <ul id="sport-summary" class="accumulation unstyled clearfix">
       <script type="text/x-handlebars-template" data-tpl-name="summary">
         <li>

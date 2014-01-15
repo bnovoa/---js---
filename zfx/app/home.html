@@ -2,14 +2,18 @@
 <html lang="zh-cmn-Hans">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>乐跑 web-app</title>
 <link rel="stylesheet" href="css/app.css">
 <!--[if lte IE 8]><script src="lib/excanvas.min.js"></script><![endif]-->
 <script src="lib/jquery-1.10.2.min.js"></script>
 <script src="lib/jquery.flot.min.js"></script>
 <script src="lib/jquery.flot.pie.min.js"></script>
+<script src="lib/jquery.placeholder.min.js"></script>
 <script>
 $(function() {
+  
+  
+		$('input, textarea').placeholder();
   
   $('#navbar .has-sub').hover(function() {
     $(this).find('.sub-list').toggle();
@@ -50,7 +54,7 @@ $(function() {
   <div id="navbar">
     <div class="inner">
       <a class="logo" href="#">
-        <img src="img/lepao_logo.png" width="92" height="40" title="到乐跑首页" alt="乐跑首页">
+        <img src="img/lepao_logo.png" width="92" height="40" title="到乐跑官网" alt="乐跑官网">
       </a>
       
       <ul class="nav">
@@ -110,7 +114,26 @@ $(function() {
   
   <div id="sign-in-container">
     <div id="sign-in-panel">
-      
+      <div class="logo-lg">
+        <a href="http://www.lepao.com" title="到乐跑官网"><img src="img/logo_large.png" width="150" height="65" alt=""></a>
+      </div>
+      <form id="sign-in-form">
+        <div class="form-field">
+          <input class="text-input" type="email" name="" value="" placeholder="邮箱" spellcheck="false" autofocus>
+        </div>
+        <div class="form-field">
+          <input class="text-input" type="password" name="" value="" placeholder="密码">
+        </div>
+        <div class="form-field field-wrapper">
+          <a class="pull-right" href="#">忘记密码？</a>
+          <label class="checkbox-inline">
+            <input class="checkbox" type="checkbox" name="" value=""> 保持我的登录状态
+          </label>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn primary-btn btn-lg">登 录</button>
+        </div>
+      </form>
     </div>
   </div>
   

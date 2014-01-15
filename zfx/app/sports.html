@@ -2,144 +2,13 @@
 <html lang="zh-cmn-Hans">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>乐跑 web-app</title>
 <link rel="stylesheet" href="css/app.css">
 <!--[if lte IE 8]><script src="lib/excanvas.min.js"></script><![endif]-->
-<script src="lib/jquery-1.10.2.min.js"></script>
-<script src="lib/jquery.flot.min.js"></script>
-<script src="lib/jquery.flot.time.min.js"></script>
-<script src="lib/jquery.flot.pie.min.js"></script>
 <style>
 
 </style>
-<script>
-$(function() {
-  /*var d = [
 
-			[Date.UTC(2011, 2, 13, 0, 0, 0), 5],
-			[Date.UTC(2011, 2, 13, 1, 0, 0), 6],
-			[Date.UTC(2011, 2, 13, 2, 0, 0), 7.5],
-			[Date.UTC(2011, 2, 13, 3, 0, 0), 9],
-			[Date.UTC(2011, 2, 13, 4, 0, 0), 11],
-			[Date.UTC(2011, 2, 13, 5, 0, 0), 14],
-			[Date.UTC(2011, 2, 13, 6, 0, 0), 16],
-			[Date.UTC(2011, 2, 13, 7, 0, 0), 19],
-			[Date.UTC(2011, 2, 13, 8, 0, 0), 25],
-			[Date.UTC(2011, 2, 13, 9, 0, 0), 27],
-			[Date.UTC(2011, 2, 13, 10, 0, 0), 28],
-			[Date.UTC(2011, 2, 13, 11, 0, 0), 29],
-			[Date.UTC(2011, 2, 13, 12, 0, 0), 29.5],
-			[Date.UTC(2011, 2, 13, 13, 0, 0), 29],
-			[Date.UTC(2011, 2, 13, 14, 0, 0), 28],
-			[Date.UTC(2011, 2, 13, 15, 0, 0), 27],
-			[Date.UTC(2011, 2, 13, 16, 0, 0), 25],
-			[Date.UTC(2011, 2, 13, 17, 0, 0), 19],
-			[Date.UTC(2011, 2, 13, 18, 0, 0), 16],
-			[Date.UTC(2011, 2, 13, 19, 0, 0), 14],
-			[Date.UTC(2011, 2, 13, 20, 0, 0), 11],
-			[Date.UTC(2011, 2, 13, 21, 0, 0), 9],
-			[Date.UTC(2011, 2, 13, 22, 0, 0), 7.5],
-			[Date.UTC(2011, 2, 13, 23, 0, 0), 6],
-			[Date.UTC(2011, 2, 15, 23, 0, 0), 6]
-		];
-		
-		$.plot("#sports-trends", [d], {
-			xaxis: {
-				mode: "time",
-				timeformat: "%H",
-				minTickSize: [1, 'hour'],
-				min: (new Date(2011, 2, 13)).getTime(),
-				max: (new Date(2011, 2, 14)).getTime()
-			},
-			series: {
-  			lines: { show: true },
-				points: { show: true }
-			},
-			grid: {
-  			
-			}
-		});
-		
-		$('#sports-trends-container .hour').on('click', function() {
-  		$.plot("#sports-trends", [d], {
-  			xaxis: {
-  				mode: "time",
-  				minTickSize: [1, 'hour'],
-  				timeformat: "%H"
-  			},
-  			series: {
-    			lines: { show: true },
-  				points: { show: true }
-  			}
-  		});
-		});
-		
-		
-		
-		$('#sports-trends-container .day').on('click', function() {
-  		$.plot("#sports-trends", [d], {
-  			xaxis: {
-  				mode: "time",
-  				minTickSize: [1, 'day'],
-  				timeformat: "%Y/%m/%d"
-  			},
-  			series: {
-    			lines: { show: true },
-  				points: { show: true }
-  			}
-  		});
-		});
-		
-		$('#sports-trends-container .day').on('click', function() {
-  		$.plot("#sports-trends", [d], {
-  			xaxis: {
-  				mode: "time",
-  				minTickSize: [1, 'day'],
-  				timeformat: "%Y/%m/%d"
-  			},
-  			series: {
-    			lines: { show: true },
-  				points: { show: true }
-  			}
-  		});
-		});
-
-		
-		$('#sports-trends-container .month').on('click', function() {
-  		$.plot("#sports-trends", [d], {
-  			xaxis: {
-  				mode: "time",
-  				minTickSize: [1, 'month'],
-  				timeformat: "%Y/%m"
-  			},
-  			series: {
-    			lines: { show: true },
-  				points: { show: true }
-  			}
-  		});
-		});*/
-		
-		var data = [],
-			series = Math.floor(Math.random() * 6) + 3;
-
-		for (var i = 0; i < series; i++) {
-			data[i] = {
-				label: "Series" + (i + 1),
-				data: Math.floor(Math.random() * 100) + 1
-			}
-		}
-		
-		$.plot('#sleep-record', data, {
-      series: {
-        pie: {
-          show: true
-        }
-      }
-    });
-		
-		
-})
-</script>
 </head>
 <body id="sports">
 
@@ -152,13 +21,17 @@ $(function() {
         <ul class="nav">
           <li id="t-profile" class="has-sub">
             <script type="text/x-handlebars-template" data-tpl-name="user-info">
-              <a href="#">
-                <img class="avatar" src="{{#if avatar}}{{avatar}}{{else}}img/avatar.jpg{{/if}}" width="32" height="32">
-                <span class="username">{{userName}}</span>
+              <a href="#" >
+                <span class="avatar-wrapper">
+                  {{#if avatar}}
+                    <img class="avatar" src="{{avatar}}" width="32" height="32">
+                  {{/if}}
+                </span>
+                <span class="username">{{#if userName}}{{userName}}{{else}}未登录{{/if}}</span>
               </a>
                {{#if userName}}
                 <ul class="sub-list">
-                  <li><a href="#">退出</a></li>
+                  <li><a id="sign-out" href="#">退出</a></li>
                 </ul>
               {{/if}}
             </script>
@@ -166,9 +39,9 @@ $(function() {
           <li id="t-home">
             <a href="index.html">首页</a>
           </li>
-          <!-- <li id="t-sports">
+          <li id="t-sports">
             <a href="sports.html">运动</a>
-          </li> -->
+          </li>
           <li id="t-data">
             <a href="data.html">数据中心</a>
           </li>
@@ -183,15 +56,15 @@ $(function() {
     
     <h2 class="page-header">运动趋势图</h2>
     <div id="sports-trends-container">
-      <div class="select-type btn-group btn-group btn-group-sm btn-group-toggle">
-        <button type="button" class="btn btn-default active" data-type="stepsData">步数</button>
+      <div class="select-type btn-group btn-group btn-group-sm btn-group-toggle" id="sports-select-type">
+        <button type="button" class="btn btn-default " data-type="stepsData">步数</button>
         <button type="button" class="btn btn-default " data-type="sleepData">睡眠</button>
         <button type="button" class="btn btn-default " data-type="calorieData">卡路里</button>
         <button type="button" class="btn btn-default" data-type="distanceData">运动距离</button>
 
       </div>
       <div class="select-period btn-group btn-group-sm btn-group-toggle pull-right">
-        <button type="button" class="hour btn btn-default active" data-type="hour">按时</button>
+        <button type="button" class="hour btn btn-default" data-type="hour">按时</button>
         <button type="button" class="day btn btn-default" data-type="day">按日</button>
 <!--         <button type="button" class="week">按周</button> -->
         <button type="button" class="month btn btn-default" data-type="month">按月</button>
