@@ -1,8 +1,7 @@
 /**
  * jQuery upload v1.2
- * http://www.ponxu.com
  *
- * @author xwz
+ * @author damonzhao
  */
 (function($) {
 	var noop = function(){ return true; };
