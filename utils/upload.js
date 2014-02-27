@@ -1,7 +1,7 @@
 /**
  * jQuery upload v1.2
  *
- * @author zf
+ * @author damonzhao
  */
 (function($) {
 	var noop = function(){ return true; };
