@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8">
+<title>炫跑App下载</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1 id="title">炫跑下载跳转...</h1>
+<script type="text/javascript">
+(function(){
+	var titleNode = document.getElementById('title');
+	var url_parts = document.URL.split('?');
+	var query = url_parts.length == 2 ? ('?' + url_parts[1]) : '';
+	var href = '/index.html';
+	var ua = navigator.userAgent.toLowerCase();
+	function redirect(){
+		location.href = href;
+	}
+	if (/iphone|ipad|ipod/.test(ua)) {
+		titleNode.innerText = "炫跑IOS版下载跳转...";
+	href = 'https://itunes.apple.com/cn/app/id639087967?mt=8';
+	setTimeout(redirect, 2000);
+	} else if (/android/.test(ua)) {
+	href = 'http://www.lepao.com/down.myapp.com/Magic.apk';
+		titleNode.innerText = "炫跑Android版下载跳转...";
+	setTimeout(redirect, 2000);
+	} else if (/windows phone|blackberry/.test(ua)) {
+		titleNode.innerText = '抱歉，暂不支持您的系统';
+	location.href = href;
+	} else {
+		location.href = href;
+	}
+})();
+</script>
+<h6>©北京炫跑科技有限公司</h6>
+</body>
+</html>
