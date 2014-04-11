@@ -1,0 +1,28 @@
+{
+    "match": {
+        "lib/zepto/*.js": {
+            "jshint": "ignore"
+        },
+        "lib/holder/*.js": {
+            "jshint": "ignore"
+        },
+        "lib/event/event.js": {
+            "jshint": "ignore"
+        },
+        "lib/hogan/hogan.js": {
+            "jshint": "ignore"
+        },
+        "lib/async/async.js": {
+            "jshint": "ignore"
+        },
+        "lib/underscore/underscore.js": {
+            "jshint": "ignore"
+        },
+        "lib/backbone/backbone.js": {
+            "jshint": "ignore"
+        },
+        "lib/iscroll/iscroll.js": {
+            "jshint": "ignore"
+        }
+    }
+}
