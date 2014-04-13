@@ -5,6 +5,39 @@ var Uploader = require('com/mobile/lib/uploader/uploader.js');
 module.exports = Widget.define({
     init: function (config) {
         this.config = config;
+        //取消删除
+        $('.cancelBtn')
+            .on('click', function() {
+                container.find('li').removeClass('focus');
+                deletePop.hide();
+            });
+        //确定删除
+        $('.okBtn')
+            .on('click', function(e) {
+                try{
+                    $('li.focus').remove();
+                    deletePop.hide();
+                    //从图片数组中把相应的图片删除
+                    deleteImg(current);
+                
+                    remain ++;
+
+                    if (remain >= o.max) {
+                        remain = o.max;
+                    } else {
+                        uploadBiz.initAddShow();
+                    }
+                    remainCount.html(remain);
+                    //提交server中删除
+                    uploadBiz.removePicUnit(current);
+                }catch(ex){
+                    GJM.log(ex,'okBtn');
+                }
+        });
+
+        //绑定上传事件
+        fileBtn
+            .on('change', uploadFile);
     },
     events:{
         'tap [data-role = "remove"]':function(){
@@ -366,61 +399,32 @@ module.exports = Widget.define({
         imageInfo.is_new = o.is_new;
         return imageInfo;
      },
-});
-
-
-var Upload = function(option) {
-/**
- *config
- */
-var uploaderConfig = function(option) {
-    var o = $.extend({
-        max : 12, //图片数量
-        maxSize : 10, //单位图片的大小，单位是M
-        container : 'uppicLists',
-        is_new : true,//isnew
-        //判断是否是新上传的图，如果是则处理，如果不是，则不处理，主要用于修改帖子
-    }, opetion);
-    return o;
-};
-
-var o = uploaderConfig(opetion), imgArr = [], isUpload = false, timer = null, remain = o.max, fileBtn = $(this), opaTip = {}, deletePop = {}, /*newLi,*/ dataId = 0, current, uploadTip = $('#uploadTip'), masker = $('#masker'), deletePopCon = $('#deleteUppic'), remainCount = $('#remain-count'), initAdd = $('#initAdd'), container = $('#' + o.container);
-remainCount.html(remain); 
-
-
-
-//绑定上传事件
-fileBtn
-    .on('change', util.getFile);
-//管理普通弹窗
-opaTip = {
-    show : function(html) {
-        //clearTimeout(timer);
-        uploadTip.show().html(html);
-        opaTip.hide();
+     //管理删除弹窗
+    deletePop:{
+        show : function(_img) {
+            masker.css('height', getHeight() + 'px').show();
+            $('#bigPicBox').attr('src', _img);
+            deletePopCon.show();
+        },
+        hide : function() {
+            masker.css('height', '100%').hide();
+            deletePopCon.hide();
+        }
     },
-    hide : function() {
-        clearTimeout(timer);
-        timer = setTimeout(function() {
-            uploadTip.hide().html('');
-        }, 1500);
+    opaTip : {
+        show : function(html) {
+            //clearTimeout(timer);
+            uploadTip.show().html(html);
+            opaTip.hide();
+        },
+        hide : function() {
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                uploadTip.hide().html('');
+            }, 1500);
+        }
     },
-};
-//管理删除弹窗
-deletePop = {
-    show : function(_img) {
-        masker.css('height', getHeight() + 'px').show();
-        $('#bigPicBox').attr('src', _img);
-        deletePopCon.show();
-    },
-    hide : function() {
-        masker.css('height', '100%').hide();
-        deletePopCon.hide();
-    }
-};
-//绑定删除图片
-container
-    .on('li', 'click', function() {
+    deleteListener: function () {
         var _this = $(this);
         if (_this.attr('id') == 'initAdd'){
             return;
@@ -431,51 +435,17 @@ container
         var _img = image.attr('src');
         current = _this.attr('data-id');
         deletePop.show(_img);
-    });
-//取消删除
-$('.cancelBtn')
-    .on('click', function() {
-        container.find('li').removeClass('focus');
-        deletePop.hide();
-    });
-//确定删除
-$('.okBtn')
-    .on('click', function(e) {
-        try{
-            $('li.focus').remove();
-            deletePop.hide();
-            //从图片数组中把相应的图片删除
-            deleteImg(current);
-        
-            remain ++;
-
-            if (remain >= o.max) {
-                remain = o.max;
-            } else {
-                uploadBiz.initAddShow();
+    },
+    deleteImg: function (index) {
+        for (var i = 0, l = imgArr.length; i < l; i++) {
+            if ((imgArr[i].id + 1) - index === 0) {//从0开始，而index从1开始
+                imgArr.splice(i, 1);
+                break;
             }
-            remainCount.html(remain);
-            //提交server中删除
-            uploadBiz.removePicUnit(current);
-        }catch(ex){
-            GJM.log(ex,'okBtn');
         }
-    });
-//删除图片数组当中第i个元素
-function deleteImg(index) {
-    for (var i = 0, l = imgArr.length; i < l; i++) {
-        if ((imgArr[i].id + 1) - index === 0) {//从0开始，而index从1开始
-            imgArr.splice(i, 1);
-            break;
-        }
+    },
+    getHeight: function () {
+        var doc = document.documentElement, body = document.body;
+        return Math.max(doc.clientHeight, doc.offsetHeight, doc.scrollHeight, body.clientHeight, body.offsetHeight, body.scrollHeight);
     }
-}
-
-};
-
-//计算整个屏幕的高度
-function getHeight() {
-var doc = document.documentElement, body = document.body;
-return Math.max(doc.clientHeight, doc.offsetHeight, doc.scrollHeight, body.clientHeight, body.offsetHeight, body.scrollHeight);
-}
-return Upload;
+});
