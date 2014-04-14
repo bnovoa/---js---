@@ -2,16 +2,47 @@ var $ = require('$');
 var count = 1;
 
 function Uploader (config) {
-    this.config = config;
+    this.config =
+    $.extend({
+        maxNum : 12, //图片数量
+        maxSize : 10, //单位图片的大小，单位是M
+        container : 'uppicLists',
+        is_new : true,//isnew
+        //判断是否是新上传的图，如果是则处理，如果不是，则不处理，主要用于修改帖子
+    },config);
     this.$el = $(config.$el);
     this.uploadedFiles = {};
     this.requests = {};
     this.files = {};
 }
+Uploader.prototype.validate = function(file) {
+    //校验提交合法性
+    var self = this;
+    var fileName = file.name.toLowerCase(), image = /image\/*/;
+    var fileInfo = {
+        id: count++,
+        name: file.name
+    };
+    if (!file.type) {
+        if (fileName.indexOf('jpg') <= -1 && fileName.indexOf('jpeg') <= -1 && fileName.indexOf('png') <= -1 && fileName.indexOf('gif') <= -1 && fileName.indexOf('bmp') <= -1) {
+            self.trigger('Upload::error', [fileInfo, '上传的文件格式必须是图片']);
+            return false;
+        }
+    } else if (file.type && !image.test(file.type)) {
+        self.trigger('Upload::error', [fileInfo, '上传的文件格式必须是图片']);
+        return false;
+    } else if (file.size / 1024 / 1024 > self.config.maxSize) {
+        self.trigger('Upload::error', [fileInfo, '上传文件的大小必须小于等于' + self.config.maxSize + 'M']);
+        return false;
+    }
+    return true;
+};
 Uploader.prototype.upload = function (file) {
     var self = this, valid = true, filename = file.name;
     var xhr, fd, params, fileInfo, key;
-
+    if(!self.validate(file)){
+        return false;
+    }
     fileInfo = {
         id: count++,
         name: file.name
@@ -87,63 +118,6 @@ Uploader.prototype.upload = function (file) {
 };
 Uploader.prototype.trigger = function () {
     this.$el.trigger.apply(this.$el, arguments);
-};
-//rotate img 
-Uploader.prototype.rotate = function (originalImageUrl,rotateInt) {
-        if(!originalImageUrl||typeof originalImageUrl !='string'){
-            self.trigger('Upload::rotateError', [' originalImageUrl illegal ']);
-        }
-        var self = this;
-        if(Zepto){
-            var obj={};
-            obj.action='rotate';
-            obj.url=originalImageUrl;
-            /**
-             * rotate 
-             */
-            var editRotateInt=0;
-            switch(rotateInt){
-                case 1:case 2:case 3:case 4:
-                    editRotateInt=rotateInt;
-                break;
-                case 5:
-                    editRotateInt=7;
-                break;
-                case 6:
-                    editRotateInt=8;
-                break;
-                case 7:
-                    editRotateInt=5;
-                break;
-                case 8:
-                    editRotateInt=6;
-                break;
-                default:
-                self.trigger('Upload::rotateError', [' rotateInt illegal ']);
-                return false;
-                break;
-            }
-            obj.oritation=editRotateInt;
-            var editUrl=GJM.image.config.urlEdit;
-            
-            $.ajax({
-              type: 'GET',
-              url: editUrl,
-              // data to be added to query string:
-              data: obj,
-              // type of data we are expecting in return:
-              dataType: 'jsonp',
-              timeout: 300,
-              success: function(data){
-                self.trigger('Upload::rotateSuccess', [data]);
-              },
-              error: function(xhr, type){
-                  self.trigger('Upload::rotateError', [xhr,type]);
-              }
-            });
-        }else{
-            self.trigger('Upload::rotateError', ['no zepto found']);
-        }
 };
 Uploader.prototype.cancel = function (id) {
     var xhr = this.requests[id];
